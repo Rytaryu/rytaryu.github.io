@@ -17,7 +17,7 @@ export default function HomeContent({ lang }: { lang: Lang }) {
       en: "B.S. in Computer Science, Meiji University, Tokyo, Japan, 2024",
     },
     {
-      jp: "明治大学大学院 先端数理科学研究科 先端メディアサイエンス専攻 2026年修了予定",
+      jp: "明治大学大学院 先端数理科学研究科 先端メディアサイエンス専攻 博士前期課程 2026年修了予定",
       en: "M.S. in Computer Science, Meiji University, Tokyo, Japan, 2026 (to be graduated)",
     },
   ];
