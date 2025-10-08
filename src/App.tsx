@@ -4,7 +4,8 @@ import { MdDocumentScanner } from "react-icons/md";
 import type { Tab, Lang } from "./utils";
 import HomeContent from "./HomeContent";
 import PublicationsContent from "./PublicationsContent";
-
+import ThemeToggle from './ThemeToggle';
+import { useTheme } from './hooks/useTheme';
 
 const tabs: { key: Tab; label: string }[] = [
   { key: "home", label: "Home" },
@@ -20,6 +21,7 @@ type SideBarProps = {
 
 function SideBar({ lang, setLang, active, setActive }: SideBarProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const { theme, toggle } = useTheme();
 
   const onSelectTab = (key: Tab) => {
     setActive(key);
@@ -62,11 +64,11 @@ function SideBar({ lang, setLang, active, setActive }: SideBarProps) {
       </button>
 
       <aside
-        className={`fixed inset-y-0 left-0 border-r bg-gray-50 transform transition-transform duration-300 ease-in-out ${
+        className={`fixed inset-y-0 left-0 border-r transform transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0 w-60 md:w-[15vw]`}
       >
-        <div className="h-full flex flex-col">
+        <div className="h-full flex flex-col ">
           <div className="px-3 py-3 border-b">
             <div className="inline-flex rounded-lg border overflow-hidden w-full">
               <button
@@ -90,6 +92,10 @@ function SideBar({ lang, setLang, active, setActive }: SideBarProps) {
                 <span className="xl:hidden">EN</span>
               </button>
             </div>
+          </div>
+
+          <div className="px-2">
+            <ThemeToggle theme={theme} onToggle={toggle} className="w-full justify-left" />
           </div>
 
           <nav className="px-2 py-2 space-y-1">
