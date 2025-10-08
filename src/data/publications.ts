@@ -1,6 +1,3 @@
-// src/data/publications.ts
-export type Bi = { jp: string; en: string }
-
 export type Publication = {
   jp: string
   en: string
