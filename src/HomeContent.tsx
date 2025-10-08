@@ -3,6 +3,7 @@ import { t, Section, IconLink } from "./utils";
 import { BsTwitterX } from "react-icons/bs";
 import { FaGithub } from "react-icons/fa";
 import { PiLinkSimple } from "react-icons/pi";
+import PhotoURL from "./assets/photo.jpg";
 
 export default function HomeContent({ lang }: { lang: Lang }) {
   const name = { jp: "當麻僚太郎", en: "Ryotaro Toma" };
@@ -84,7 +85,7 @@ export default function HomeContent({ lang }: { lang: Lang }) {
         <div className="w-[140px] sm:w-[160px] md:w-[200px]">
           <div className="aspect-square rounded-xl border bg-gray-100 overflow-hidden">
             <img
-              src="/resources/photo.jpg"
+              src={PhotoURL}
               alt={t("顔写真", "Portrait", lang)}
               className="h-full w-full object-cover"
               onError={(e) => {
@@ -102,10 +103,10 @@ export default function HomeContent({ lang }: { lang: Lang }) {
                 aria={t("X（旧Twitter）: @Rytaryu", "X (Twitter): @Rytaryu", lang)}
               />
               <IconLink
-                href="https://github.com/rytar"
+                href="https://github.com/Rytaryu"
                 icon={FaGithub}
-                handle="rytar"
-                aria={t("GitHub: rytar", "GitHub: rytar", lang)}
+                handle="Rytaryu"
+                aria={t("GitHub: Rytaryu", "GitHub: Rytaryu", lang)}
               />
               <IconLink
                 href="https://www.kikn.fms.meiji.ac.jp/paper/2025/master/index.html#toma"
