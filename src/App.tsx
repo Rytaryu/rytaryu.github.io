@@ -33,14 +33,14 @@ function SideBar({ lang, setLang, active, setActive }: SideBarProps) {
     <>
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/50 md:hidden"
+          className="fixed inset-0 bg-black/50 sm:hidden"
           onClick={() => setIsOpen(false)}
           aria-hidden="true"
         ></div>
       )}
 
       <button
-        className="md:hidden p-2 text-gray-700"
+        className="sm:hidden p-2 text-gray-700"
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Toggle menu"
       >
@@ -60,30 +60,32 @@ function SideBar({ lang, setLang, active, setActive }: SideBarProps) {
       </button>
 
       <aside
-        className={`fixed inset-y-0 left-0 w-[10vw] min-w-60 border-r bg-gray-50 transform transition-transform duration-300 ease-in-out ${
+        className={`fixed inset-y-0 left-0 border-r bg-gray-50 transform transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } md:translate-x-0`}
+        } sm:translate-x-0 w-60 md:w-[15vw]`}
       >
         <div className="h-full flex flex-col">
           <div className="px-3 py-3 border-b">
             <div className="inline-flex rounded-lg border overflow-hidden w-full">
               <button
-                className={`w-1/2 px-3 py-1 text-md ${
+                className={`w-1/2 px-3 py-1 text-sm ${
                   lang === "jp" ? "bg-white" : "bg-gray-100 hover:bg-gray-50"
-                }`}
+                } md:px-2 md:text-xs`}
                 aria-pressed={lang === "jp"}
                 onClick={() => setLang("jp")}
               >
-                日本語
+                <span className="hidden lg:inline">日本語</span>
+                <span className="lg:hidden">日</span>
               </button>
               <button
-                className={`w-1/2 px-3 py-1 text-md border-l ${
+                className={`w-1/2 px-3 py-1 text-sm border-l ${
                   lang === "en" ? "bg-white" : "bg-gray-100 hover:bg-gray-50"
-                }`}
+                } md:px-2 md:text-xs`}
                 aria-pressed={lang === "en"}
                 onClick={() => setLang("en")}
               >
-                English
+                <span className="hidden lg:inline">English</span>
+                <span className="lg:hidden">EN</span>
               </button>
             </div>
           </div>
@@ -95,7 +97,7 @@ function SideBar({ lang, setLang, active, setActive }: SideBarProps) {
                 onClick={() => onSelectTab(t.key)}
                 className={`w-full text-left px-3 py-2 rounded-lg ${
                   active === t.key ? "bg-gray-100 border" : "hover:bg-gray-50"
-                } ${isOpen ? "block" : "hidden md:block"}`}
+                } ${isOpen ? "block" : "hidden sm:block"}`}
                 aria-current={active === t.key ? "page" : undefined}
               >
                 {t.label}
@@ -132,7 +134,7 @@ export default function App() {
   return (
     <main className="grid grid-cols-[auto,1fr] min-h-screen">
       <SideBar lang={lang} setLang={setLang} active={active} setActive={setActive} />
-      <div className="w-full ml-[15vw] mt-20">
+      <div className="w-[70vw] ml-[20vw] mr-[10vw] mt-20">
           {active === "home" && <HomeContent lang={lang} />}
           {active === "publications" && <PublicationsContent lang={lang} />}
       </div>

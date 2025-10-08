@@ -16,7 +16,7 @@ export default function PublicationsContent({ lang }: { lang: Lang }) {
   );
 
   return (
-    <div className="w-[85vw]">
+    <div>
       <div className="mb-4">
         <input
           value={q}

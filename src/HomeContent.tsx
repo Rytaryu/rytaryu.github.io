@@ -35,7 +35,7 @@ export default function HomeContent({ lang }: { lang: Lang }) {
   const year = new Date().getFullYear();
 
   return (
-    <div className="w-[85vw]">
+    <div>
       <div className="flex flex-row items-start gap-[5vw]">
         <div className="flex-1 w-[55vw]">
           <h1 className="text-3xl md:text-4xl font-extrabold leading-tight">
@@ -82,7 +82,7 @@ export default function HomeContent({ lang }: { lang: Lang }) {
           </footer>
         </div>
 
-        <div className="w-[25vw] sm:w-[15vw] md:w-[20vw]">
+        <div className="w-[20vw] sm:w-[10vw] md:w-[15vw]">
           <div className="aspect-square rounded-xl border bg-gray-100 overflow-hidden">
             <img
               src={PhotoURL}
