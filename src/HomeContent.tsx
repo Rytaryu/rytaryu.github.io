@@ -38,9 +38,9 @@ export default function HomeContent({ lang }: { lang: Lang }) {
     <div>
       <div className="flex flex-row items-start gap-[5vw]">
         <div className="flex-1 w-[55vw] md:w-[50vw]">
-          <h1 className="text-2xl md:text-3xl mb-[5vh] font-extrabold leading-tight">
+          <p className="text-4xl md:text-5xl mb-[5vh] font-extrabold leading-tight">
             {t(name.jp, name.en, lang)}
-          </h1>
+          </p>
 
           <Section title={t("所属", "Affiliation", lang)}>
             <p>{t(affiliation.jp, affiliation.en, lang)}</p>
