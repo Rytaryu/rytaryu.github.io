@@ -33,14 +33,14 @@ function SideBar({ lang, setLang, active, setActive }: SideBarProps) {
     <>
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/50 sm:hidden"
+          className="fixed inset-0 bg-black/50 md:hidden"
           onClick={() => setIsOpen(false)}
           aria-hidden="true"
         ></div>
       )}
 
       <button
-        className="sm:hidden p-2 text-gray-700"
+        className="md:hidden p-2 text-gray-700, bg-gray-100"
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Toggle menu"
       >
@@ -62,13 +62,13 @@ function SideBar({ lang, setLang, active, setActive }: SideBarProps) {
       <aside
         className={`fixed inset-y-0 left-0 border-r bg-gray-50 transform transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } sm:translate-x-0 w-60 md:w-[15vw]`}
+        } md:translate-x-0 w-60 md:w-[15vw]`}
       >
         <div className="h-full flex flex-col">
           <div className="px-3 py-3 border-b">
             <div className="inline-flex rounded-lg border overflow-hidden w-full">
               <button
-                className={`w-1/2 px-3 py-1 text-sm ${
+                className={`w-1/2 px-3 py-1 text-md ${
                   lang === "jp" ? "bg-white" : "bg-gray-100 hover:bg-gray-50"
                 } md:px-2 md:text-xs`}
                 aria-pressed={lang === "jp"}
@@ -78,7 +78,7 @@ function SideBar({ lang, setLang, active, setActive }: SideBarProps) {
                 <span className="lg:hidden">日</span>
               </button>
               <button
-                className={`w-1/2 px-3 py-1 text-sm border-l ${
+                className={`w-1/2 px-3 py-1 text-md border-l ${
                   lang === "en" ? "bg-white" : "bg-gray-100 hover:bg-gray-50"
                 } md:px-2 md:text-xs`}
                 aria-pressed={lang === "en"}
@@ -97,7 +97,7 @@ function SideBar({ lang, setLang, active, setActive }: SideBarProps) {
                 onClick={() => onSelectTab(t.key)}
                 className={`w-full text-left px-3 py-2 rounded-lg ${
                   active === t.key ? "bg-gray-100 border" : "hover:bg-gray-50"
-                } ${isOpen ? "block" : "hidden sm:block"}`}
+                } ${isOpen ? "block" : "hidden md:block"}`}
                 aria-current={active === t.key ? "page" : undefined}
               >
                 {t.label}
