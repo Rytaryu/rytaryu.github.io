@@ -44,7 +44,7 @@ function SideBar({ lang, setLang, active, setActive }: SideBarProps) {
       )}
 
       <button
-        className="md:hidden p-2 text-gray-700, bg-gray-100"
+        className="md:hidden p-2 text-gray-800 bg-gray-100 dark:text-gray-100 dark:bg-gray-800 rounded-lg"
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Toggle menu"
       >
@@ -64,16 +64,16 @@ function SideBar({ lang, setLang, active, setActive }: SideBarProps) {
       </button>
 
       <aside
-        className={`fixed inset-y-0 left-0 border-r transform transition-transform duration-300 ease-in-out ${
+        className={`fixed inset-y-0 left-0 border-r bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-100 transform transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0 w-60 md:w-[15vw]`}
       >
-        <div className="h-full flex flex-col ">
+        <div className="h-full flex flex-col">
           <div className="px-3 py-3 border-b">
             <div className="inline-flex rounded-lg border overflow-hidden w-full">
               <button
                 className={`w-1/2 px-3 py-1 text-md ${
-                  lang === "jp" ? "bg-white" : "bg-gray-100 hover:bg-gray-50"
+                  lang === "jp" ? "bg-gray-100" : "bg-gray-100 hover:bg-gray-400"
                 } md:px-2 md:text-xs`}
                 aria-pressed={lang === "jp"}
                 onClick={() => setLang("jp")}
@@ -83,7 +83,7 @@ function SideBar({ lang, setLang, active, setActive }: SideBarProps) {
               </button>
               <button
                 className={`w-1/2 px-3 py-1 text-md border-l ${
-                  lang === "en" ? "bg-white" : "bg-gray-100 hover:bg-gray-50"
+                  lang === "en" ? "bg-gray-100" : "bg-gray-100 hover:bg-gray-400"
                 } md:px-2 md:text-xs`}
                 aria-pressed={lang === "en"}
                 onClick={() => setLang("en")}
@@ -144,7 +144,7 @@ export default function App() {
 
 
   return (
-    <main className="grid grid-cols-[auto,1fr] min-h-screen bg-white text-gray-800">
+    <main className="grid grid-cols-[auto,1fr] min-h-screen bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-100">
       <SideBar lang={lang} setLang={setLang} active={active} setActive={setActive} />
       <div className="w-[80vw] md:w-[70vw] ml-[10vw] md:ml-[20vw] mr-[10vw] mt-20">
           {active === "home" && <HomeContent lang={lang} />}
