@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { FaHome } from "react-icons/fa";
+import { MdDocumentScanner } from "react-icons/md";
 import type { Tab, Lang } from "./utils";
 import HomeContent from "./HomeContent";
 import PublicationsContent from "./PublicationsContent";
@@ -74,8 +76,8 @@ function SideBar({ lang, setLang, active, setActive }: SideBarProps) {
                 aria-pressed={lang === "jp"}
                 onClick={() => setLang("jp")}
               >
-                <span className="hidden lg:inline">日本語</span>
-                <span className="lg:hidden">日</span>
+                <span className="hidden xl:inline">日本語</span>
+                <span className="xl:hidden">日</span>
               </button>
               <button
                 className={`w-1/2 px-3 py-1 text-md border-l ${
@@ -84,8 +86,8 @@ function SideBar({ lang, setLang, active, setActive }: SideBarProps) {
                 aria-pressed={lang === "en"}
                 onClick={() => setLang("en")}
               >
-                <span className="hidden lg:inline">English</span>
-                <span className="lg:hidden">EN</span>
+                <span className="hidden xl:inline">English</span>
+                <span className="xl:hidden">EN</span>
               </button>
             </div>
           </div>
@@ -95,12 +97,16 @@ function SideBar({ lang, setLang, active, setActive }: SideBarProps) {
               <button
                 key={t.key}
                 onClick={() => onSelectTab(t.key)}
-                className={`w-full text-left px-3 py-2 rounded-lg ${
+                className={`w-full text-left px-3 py-2 rounded-lg flex items-center gap-2 ${
                   active === t.key ? "bg-gray-100 border" : "hover:bg-gray-50"
                 } ${isOpen ? "block" : "hidden md:block"}`}
                 aria-current={active === t.key ? "page" : undefined}
               >
-                {t.label}
+                <div className="flex justify-left items-center gap-2">
+                  {t.key === "home" && <FaHome className="text-gray-600" />}
+                  {t.key === "publications" && <MdDocumentScanner className="text-gray-600" />}
+                  {t.label}
+                </div>
               </button>
             ))}
           </nav>
@@ -134,7 +140,7 @@ export default function App() {
   return (
     <main className="grid grid-cols-[auto,1fr] min-h-screen bg-white text-gray-800">
       <SideBar lang={lang} setLang={setLang} active={active} setActive={setActive} />
-      <div className="w-[70vw] ml-[20vw] mr-[10vw] mt-20">
+      <div className="w-[80vw] md:w-[70vw] ml-[10vw] md:ml-[20vw] mr-[10vw] mt-20">
           {active === "home" && <HomeContent lang={lang} />}
           {active === "publications" && <PublicationsContent lang={lang} />}
       </div>

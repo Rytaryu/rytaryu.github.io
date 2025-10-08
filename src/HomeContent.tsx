@@ -26,10 +26,10 @@ export default function HomeContent({ lang }: { lang: Lang }) {
     { jp: "機械学習", en: "Machine Learning" },
     { jp: "プライバシー保護技術", en: "PETs (Privacy-Enhancing Technologies)" },
   ];
-  const address = {
-    jp: "〒164-8525 東京都中野区中野4-21-1",
-    en: "4-21-1 Nakano, Nakano-ku, Tokyo 164-8525, Japan",
-  };
+//   const address = {
+//     jp: "〒164-8525 東京都中野区中野4-21-1",
+//     en: "4-21-1 Nakano, Nakano-ku, Tokyo 164-8525, Japan",
+//   };
 //   const phone = { jp: "080-1156-0379", en: "+81-80-1156-0379" };
   const email = "cs242022@meiji.ac.jp";
   const year = new Date().getFullYear();
@@ -37,7 +37,7 @@ export default function HomeContent({ lang }: { lang: Lang }) {
   return (
     <div>
       <div className="flex flex-row items-start gap-[5vw]">
-        <div className="flex-1 w-[55vw]">
+        <div className="flex-1 w-[55vw] md:w-[50vw]">
           <h1 className="text-3xl md:text-4xl font-extrabold leading-tight">
             {t(name.jp, name.en, lang)}
           </h1>
@@ -64,7 +64,7 @@ export default function HomeContent({ lang }: { lang: Lang }) {
 
           <Section title={t("連絡先", "Contact", lang)}>
             <div className="space-y-1">
-              <p>{t("住所", "Address", lang)}：{t(address.jp, address.en, lang)}</p>
+              {/* <p>{t("住所", "Address", lang)}：{t(address.jp, address.en, lang)}</p> */}
               {/* <p>
                 {t("電話番号", "Phone", lang)}：
                 <a className="underline" href={lang === "jp" ? "tel:08011560379" : "tel:+818011560379"}>
@@ -82,7 +82,7 @@ export default function HomeContent({ lang }: { lang: Lang }) {
           </footer>
         </div>
 
-        <div className="w-[20vw] sm:w-[10vw] md:w-[15vw]">
+        <div className="w-[20vw] md:w-[15vw]">
           <div className="aspect-square rounded-xl border bg-gray-100 overflow-hidden">
             <img
               src={PhotoURL}
