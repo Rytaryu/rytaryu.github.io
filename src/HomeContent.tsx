@@ -35,9 +35,9 @@ export default function HomeContent({ lang }: { lang: Lang }) {
   const year = new Date().getFullYear();
 
   return (
-    <div className="w-[60vw]">
-      <div className="flex flex-row items-start gap-20">
-        <div className="flex-1">
+    <div className="w-[75vw]">
+      <div className="flex flex-row items-start gap-[5vw]">
+        <div className="flex-1 w-[50vw]">
           <h1 className="text-3xl md:text-4xl font-extrabold leading-tight">
             {t(name.jp, name.en, lang)}
           </h1>
@@ -82,7 +82,7 @@ export default function HomeContent({ lang }: { lang: Lang }) {
           </footer>
         </div>
 
-        <div className="w-[140px] sm:w-[160px] md:w-[200px]">
+        <div className="w-[20vw] sm:w-[10vw] md:w-[15vw]">
           <div className="aspect-square rounded-xl border bg-gray-100 overflow-hidden">
             <img
               src={PhotoURL}
@@ -94,7 +94,7 @@ export default function HomeContent({ lang }: { lang: Lang }) {
             />
           </div>
 
-          <div className="pt-6 pl-6">
+          <div className="mt-6 ml-[1vw]">
             <ul className="space-y-1">
               <IconLink
                 href="https://x.com/Rytaryu"
