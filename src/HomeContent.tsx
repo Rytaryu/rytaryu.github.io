@@ -30,7 +30,7 @@ export default function HomeContent({ lang }: { lang: Lang }) {
     jp: "〒164-8525 東京都中野区中野4-21-1",
     en: "4-21-1 Nakano, Nakano-ku, Tokyo 164-8525, Japan",
   };
-  const phone = { jp: "080-1156-0379", en: "+81-80-1156-0379" };
+//   const phone = { jp: "080-1156-0379", en: "+81-80-1156-0379" };
   const email = "cs242022@meiji.ac.jp";
   const year = new Date().getFullYear();
 
@@ -65,12 +65,12 @@ export default function HomeContent({ lang }: { lang: Lang }) {
           <Section title={t("連絡先", "Contact", lang)}>
             <div className="space-y-1">
               <p>{t("住所", "Address", lang)}：{t(address.jp, address.en, lang)}</p>
-              <p>
+              {/* <p>
                 {t("電話番号", "Phone", lang)}：
                 <a className="underline" href={lang === "jp" ? "tel:08011560379" : "tel:+818011560379"}>
                   {t(phone.jp, phone.en, lang)}
                 </a>
-              </p>
+              </p> */}
               <p>
                 Email： <a className="underline" href={`mailto:${email}`}>{email}</a>
               </p>

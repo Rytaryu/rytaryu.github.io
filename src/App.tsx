@@ -132,7 +132,7 @@ export default function App() {
 
 
   return (
-    <main className="grid grid-cols-[auto,1fr] min-h-screen">
+    <main className="grid grid-cols-[auto,1fr] min-h-screen bg-white text-gray-800">
       <SideBar lang={lang} setLang={setLang} active={active} setActive={setActive} />
       <div className="w-[70vw] ml-[20vw] mr-[10vw] mt-20">
           {active === "home" && <HomeContent lang={lang} />}
