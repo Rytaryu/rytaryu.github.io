@@ -4,8 +4,6 @@ import { MdDocumentScanner } from "react-icons/md";
 import type { Tab, Lang } from "./utils";
 import HomeContent from "./HomeContent";
 import PublicationsContent from "./PublicationsContent";
-import ThemeToggle from './ThemeToggle';
-import { useTheme } from './hooks/useTheme';
 
 const tabs: { key: Tab; label: string }[] = [
   { key: "home", label: "Home" },
@@ -21,7 +19,6 @@ type SideBarProps = {
 
 function SideBar({ lang, setLang, active, setActive }: SideBarProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const { theme, toggle } = useTheme();
 
   const onSelectTab = (key: Tab) => {
     setActive(key);
@@ -64,7 +61,7 @@ function SideBar({ lang, setLang, active, setActive }: SideBarProps) {
       </button>
 
       <aside
-        className={`fixed inset-y-0 left-0 border-r bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-100 transform transition-transform duration-300 ease-in-out ${
+        className={`fixed inset-y-0 left-0 border-r bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transform transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } md:translate-x-0 w-60 md:w-[15vw]`}
       >
@@ -73,7 +70,7 @@ function SideBar({ lang, setLang, active, setActive }: SideBarProps) {
             <div className="inline-flex rounded-lg border overflow-hidden w-full">
               <button
                 className={`w-1/2 px-3 py-1 text-md ${
-                  lang === "jp" ? "bg-gray-100" : "bg-gray-100 hover:bg-gray-400"
+                  lang === "jp" ? "bg-gray-100" : "bg-gray-100 hover:bg-gray-50"
                 } md:px-2 md:text-xs`}
                 aria-pressed={lang === "jp"}
                 onClick={() => setLang("jp")}
@@ -83,7 +80,7 @@ function SideBar({ lang, setLang, active, setActive }: SideBarProps) {
               </button>
               <button
                 className={`w-1/2 px-3 py-1 text-md border-l ${
-                  lang === "en" ? "bg-gray-100" : "bg-gray-100 hover:bg-gray-400"
+                  lang === "en" ? "bg-gray-100" : "bg-gray-100 hover:bg-gray-50"
                 } md:px-2 md:text-xs`}
                 aria-pressed={lang === "en"}
                 onClick={() => setLang("en")}
@@ -92,10 +89,6 @@ function SideBar({ lang, setLang, active, setActive }: SideBarProps) {
                 <span className="xl:hidden">EN</span>
               </button>
             </div>
-          </div>
-
-          <div className="px-2">
-            <ThemeToggle theme={theme} onToggle={toggle} className="w-full justify-left" />
           </div>
 
           <nav className="px-2 py-2 space-y-1">
@@ -109,8 +102,8 @@ function SideBar({ lang, setLang, active, setActive }: SideBarProps) {
                 aria-current={active === t.key ? "page" : undefined}
               >
                 <div className="flex justify-left items-center gap-2">
-                  {t.key === "home" && <FaHome className="text-gray-600" />}
-                  {t.key === "publications" && <MdDocumentScanner className="text-gray-600" />}
+                  {t.key === "home" && <FaHome className="text-gray-900 dark:text-gray-100" />}
+                  {t.key === "publications" && <MdDocumentScanner className="text-gray-900 dark:text-gray-100" />}
                   {t.label}
                 </div>
               </button>
@@ -144,7 +137,7 @@ export default function App() {
 
 
   return (
-    <main className="grid grid-cols-[auto,1fr] min-h-screen bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-100">
+    <main className="grid grid-cols-[auto,1fr] min-h-screen bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
       <SideBar lang={lang} setLang={setLang} active={active} setActive={setActive} />
       <div className="w-[80vw] md:w-[70vw] ml-[10vw] md:ml-[20vw] mr-[10vw] mt-20">
           {active === "home" && <HomeContent lang={lang} />}
