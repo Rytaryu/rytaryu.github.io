@@ -25,6 +25,10 @@ export default function App() {
     return () => window.removeEventListener("hashchange", fromHash);
   }, []);
 
+  useEffect(() => {
+    document.documentElement.lang = (lang === "jp" ? "ja" : "en");
+  }, [lang]);
+
   const onSelectTab = (key: Tab) => {
     setActive(key);
     history.replaceState(null, "", `#${key}`);
