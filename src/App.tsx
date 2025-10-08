@@ -36,7 +36,7 @@ export default function App() {
 
   return (
     <main className="grid grid-cols-[auto,1fr] min-h-screen">
-      <aside className="fixed inset-y-0 left-0 w-56 border-r bg-gray-50">
+      <aside className="fixed inset-y-0 left-0 w-[15vw] border-r bg-gray-50">
         <div className="h-full flex flex-col">
           <div className="px-3 py-3 border-b">
             <div className="inline-flex rounded-lg border overflow-hidden w-full">
@@ -76,7 +76,7 @@ export default function App() {
         </div>
       </aside>
 
-      <div className="w-full pl-80 pt-20">
+      <div className="w-full ml-[20vw] mt-20">
           {active === "home" && <HomeContent lang={lang} />}
           {active === "publications" && <PublicationsContent lang={lang} />}
       </div>
