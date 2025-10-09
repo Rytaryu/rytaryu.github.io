@@ -1,27 +1,36 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>當麻僚太郎 / Ryotaro Toma</title>
-    <meta name="description" content="當麻僚太郎 / Ryotaro Toma — 明治大学大学院先端数理科学研究科 / Graduate School of Advanced Mathematical Sciences, Meiji University" />
-    <meta property="og:title" content="當麻僚太郎 / Ryotaro Toma" />
-    <meta property="og:description" content="明治大学大学院先端数理科学研究科 / Graduate School of Advanced Mathematical Sciences, Meiji University" />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary" />
-    <script>
-      (() => {
-        const stored = localStorage.getItem('theme');      // 'light' | 'dark' | null
-        const preferDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const theme = stored || (preferDark ? 'dark' : 'light');
-        if (theme === 'dark') document.documentElement.classList.add('dark');
-        // UA要素の配色ヒント
-        document.documentElement.style.colorScheme = theme;
-      })();
-    </script>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>當麻僚太郎 / Ryotaro Toma</title>
+        <meta
+            name="description"
+            content="當麻僚太郎 / Ryotaro Toma — 明治大学大学院先端数理科学研究科 / Graduate School of Advanced Mathematical Sciences, Meiji University"
+        />
+        <meta property="og:title" content="當麻僚太郎 / Ryotaro Toma" />
+        <meta
+            property="og:description"
+            content="明治大学大学院先端数理科学研究科 / Graduate School of Advanced Mathematical Sciences, Meiji University"
+        />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary" />
+        <script>
+            (() => {
+                const stored = localStorage.getItem("theme"); // 'light' | 'dark' | null
+                const preferDark = window.matchMedia(
+                    "(prefers-color-scheme: dark)"
+                ).matches;
+                const theme = stored || (preferDark ? "dark" : "light");
+                if (theme === "dark")
+                    document.documentElement.classList.add("dark");
+                // UA要素の配色ヒント
+                document.documentElement.style.colorScheme = theme;
+            })();
+        </script>
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="module" src="/src/main.tsx"></script>
+    </body>
 </html>
