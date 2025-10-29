@@ -191,6 +191,24 @@ const IPSJ2025: Article = {
     note: setContentString("(in Japanese)", " "),
 };
 
+const CSS2025: InProceedings = {
+    authors: [
+        setContentString("Ryotaro Toma", "當麻 僚太郎"),
+        setContentString("Hiroaki Kikuchi", "菊池 浩明"),
+    ],
+    title: setContentString(
+        "Empirical Evaluation of Record Reconstruction Risk and Explainability",
+        "説明可能性に対するレコード再構築リスクの実験的評価",
+    ),
+    booktitle: setContentString(
+        "Computer Security Symposium 2025 (CSS2025)",
+        "コンピュータセキュリティシンポジウム2025（CSS2025）"
+    ),
+    year: 2025,
+    english_only: false,
+    note: setContentString("(in Japanese)", " "),
+}
+
 export const pubsPeerReviewed: Publication[] = [
     MSPN2023,
     MDAI2024,
@@ -204,6 +222,7 @@ export const pubsDomestic: Publication[] = [
     CSS2023,
     ICSS2024,
     CSS2024,
+    CSS2025,
 ];
 
 export const toText = (p: Publication, lang: Lang): string => {
