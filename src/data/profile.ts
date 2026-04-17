@@ -1,10 +1,16 @@
 import { setContentString } from "../utils";
 
 export const name = setContentString("Ryotaro Toma", "當麻 僚太郎");
-export const affiliation = setContentString(
-    "Graduate School of Advanced Mathematical Sciences, Meiji University, Tokyo, Japan (M.S. student, 2nd year)",
-    "明治大学大学院 先端数理科学研究科 先端メディアサイエンス専攻 博士前期課程 2年"
-);
+export const affiliation = [
+    setContentString(
+        "Graduate School of Advanced Mathematical Sciences, Meiji University, Tokyo, Japan (Ph.D. student, 1st year)",
+        "明治大学大学院 先端数理科学研究科 先端メディアサイエンス専攻 博士後期課程 1年"
+    ),
+    setContentString(
+        "Research Associate, School of Interdisciplinary Mathematical Sciences, Meiji University",
+        "明治大学総合数理学部助手"
+    ),
+];
 export const education = [
     setContentString(
         "B.S. in Computer Science, Meiji University, Tokyo, Japan, 2024",

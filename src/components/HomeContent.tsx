@@ -24,7 +24,11 @@ export default function HomeContent({ lang }: { lang: Lang }) {
                     </p>
 
                     <Section title={t(lang, "Affiliation", "所属")}>
-                        <p>{t(lang, affiliation.en, affiliation.jp)}</p>
+                        <ul className="list-disc pl-6 space-y-1">
+                            {affiliation.map((item, i) => (
+                                <li key={i}>{t(lang, item.en, item.jp)}</li>
+                            ))}
+                        </ul>
                     </Section>
 
                     <Section title={t(lang, "Research Interests", "研究分野")}>
