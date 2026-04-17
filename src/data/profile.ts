@@ -11,8 +11,12 @@ export const education = [
         "明治大学 総合数理学部 先端メディアサイエンス学科 2024年卒業"
     ),
     setContentString(
-        "M.S. in Computer Science, Meiji University, Tokyo, Japan, 2026 (to be graduated)",
-        "明治大学大学院 先端数理科学研究科 先端メディアサイエンス専攻 博士前期課程 2026年修了予定"
+        "M.S. in Computer Science, Meiji University, Tokyo, Japan, 2026",
+        "明治大学大学院 先端数理科学研究科 先端メディアサイエンス専攻 博士前期課程 2026年修了"
+    ),
+    setContentString(
+        "Ph.D. in Computer Science, Meiji University, Tokyo, Japan, 2029 (to be graduated)",
+        "明治大学大学院 先端数理科学研究科 先端メディアサイエンス専攻 博士後期課程 2029年修了予定"
     ),
 ];
 export const interests = [
@@ -23,4 +27,4 @@ export const interests = [
         "プライバシー保護技術"
     ),
 ];
-export const email = "cs242022@meiji.ac.jp";
+export const email = "rytaryu@meiji.ac.jp";

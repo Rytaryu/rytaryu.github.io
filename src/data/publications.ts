@@ -207,7 +207,23 @@ const CSS2025: InProceedings = {
     year: 2025,
     english_only: false,
     note: setContentString("(in Japanese)", " "),
-}
+};
+
+const ICPRAI2026: InProceedings = {
+    authors: [
+        setContentString("Ryotaro Toma"),
+        setContentString("Ghazaleh Khodabandelou"),
+        setContentString("Hiroaki Kikuchi"),
+    ],
+    title: setContentString(
+        "Privacy-Preserving Explainable AI via Explanation Masking against Record Reconstruction Attacks for Healthcare"
+    ),
+    booktitle: setContentString(
+        "The Fifth International Conference on Pattern Recognition and Artificial Intelligence 2026 (ICPRAI2026)"
+    ),
+    year: 2026,
+    english_only: true,
+};
 
 export const pubsPeerReviewed: Publication[] = [
     MSPN2023,
@@ -215,6 +231,7 @@ export const pubsPeerReviewed: Publication[] = [
     PSD2024,
     JSAIisAI2025,
     IPSJ2025,
+    ICPRAI2026,
 ];
 
 export const pubsDomestic: Publication[] = [

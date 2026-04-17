@@ -41,7 +41,7 @@ function SideBar({ lang, setLang, active, setActive }: SideBarProps) {
             )}
 
             <button
-                className="md:hidden p-2 text-gray-800 bg-gray-100 dark:text-gray-100 dark:bg-gray-800 rounded-lg"
+                className="rounded-lg bg-gray-100 p-2 text-gray-800 md:hidden"
                 onClick={() => setIsOpen(!isOpen)}
                 aria-label="Toggle menu"
             >
@@ -61,7 +61,7 @@ function SideBar({ lang, setLang, active, setActive }: SideBarProps) {
             </button>
 
             <aside
-                className={`fixed inset-y-0 left-0 border-r bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transform transition-transform duration-300 ease-in-out ${
+                className={`fixed inset-y-0 left-0 border-r bg-gray-100 text-gray-900 transform transition-transform duration-300 ease-in-out ${
                     isOpen ? "translate-x-0" : "-translate-x-full"
                 } md:translate-x-0 w-60 md:w-[15vw]`}
             >
@@ -113,10 +113,10 @@ function SideBar({ lang, setLang, active, setActive }: SideBarProps) {
                             >
                                 <div className="flex justify-left items-center gap-2">
                                     {t.key === "home" && (
-                                        <FaHome className="text-gray-900 dark:text-gray-100" />
+                                        <FaHome className="text-gray-900" />
                                     )}
                                     {t.key === "publications" && (
-                                        <MdDocumentScanner className="text-gray-900 dark:text-gray-100" />
+                                        <MdDocumentScanner className="text-gray-900" />
                                     )}
                                     {t.label}
                                 </div>
@@ -147,7 +147,7 @@ export default function App() {
     }, []);
 
     return (
-        <main className="grid grid-cols-[auto,1fr] min-h-screen bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
+        <main className="grid min-h-screen grid-cols-[auto,1fr] bg-gray-100 text-gray-900">
             <SideBar
                 lang={lang}
                 setLang={setLang}
