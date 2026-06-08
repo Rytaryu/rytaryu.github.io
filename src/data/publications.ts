@@ -1,6 +1,15 @@
 import type { Lang, ContentString } from "../utils";
 import { setContentString, t } from "../utils";
 
+export type PublicationLink = {
+    type: "paper" | "slides";
+    url: string;
+};
+
+type PublicationResources = {
+    links?: PublicationLink[];
+};
+
 type Article = {
     authors: ContentString[];
     title: ContentString;
@@ -12,7 +21,7 @@ type Article = {
     pages?: ContentString;
     month?: ContentString;
     note?: ContentString;
-};
+} & PublicationResources;
 
 type InProceedings = {
     authors: ContentString[];
@@ -24,7 +33,7 @@ type InProceedings = {
     publisher?: ContentString;
     address?: ContentString;
     note?: ContentString;
-};
+} & PublicationResources;
 
 type Publication = Article | InProceedings;
 
@@ -223,6 +232,9 @@ const ICPRAI2026: InProceedings = {
     ),
     year: 2026,
     english_only: true,
+    links: [
+        { type: "paper", url: "/publications/ICPRAI2026_paper_v6.pdf" },
+    ],
 };
 
 export const pubsPeerReviewed: Publication[] = [
