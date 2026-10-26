@@ -111,7 +111,7 @@ export default function PublicationsContent({ lang }: { lang: Lang }) {
             <Section
                 title={t(
                     lang,
-                    "Domestic Conferences & Symposiums (Non-referred)",
+                    "Domestic Conferences & Symposiums (Non-refereed)",
                     "国内会議・シンポジウム等（査読なし）"
                 )}
             >

@@ -32,7 +32,9 @@ type InProceedings = {
     series?: ContentString;
     volume?: ContentString;
     number?: ContentString;
+    reportNumber?: string;
     pages?: ContentString;
+    organization?: ContentString;
     publisher?: ContentString;
     address?: ContentString;
     note?: ContentString;
@@ -43,10 +45,11 @@ export type Publication = Article | InProceedings;
 const CSEC2023: InProceedings = {
     authors: [
         setContentString("Ryotaro Toma", "當麻 僚太郎"),
+        setContentString("Terumi Yaguchi", "谷口 輝海"),
         setContentString("Hiroaki Kikuchi", "菊池 浩明"),
     ],
     title: setContentString(
-        "Multiple Person Tracking based on Gait Identification using Kinect and OpenPose",
+        "Multiple person tracking based on gait identification using Kinect and OpenPose",
         "歩容に基づく個人識別におけるKinectとOpenPoseの多人数追跡評価"
     ),
     booktitle: setContentString(
@@ -68,7 +71,7 @@ const MSPN2023: InProceedings = {
         setContentString("Hiroaki Kikuchi"),
     ],
     title: setContentString(
-        "Multiple Person Tracking based on Gait Identification using Kinect and OpenPose"
+        "Multiple Person Tracking Based on Gait Identification Using Kinect and OpenPose"
     ),
     booktitle: setContentString(
         "Mobile, Secure, and Programmable Networking (MSPN2023)"
@@ -88,19 +91,20 @@ const CSS2023: InProceedings = {
         setContentString("Hiroaki Kikuchi", "菊池 浩明"),
     ],
     title: setContentString(
-        "Evaluation and Mitigation of Feature Inference Risk from Explainable AI Metrics Shapley Values",
+        "Mitigation and Evaluation the Risk of Feature Inference Attack from AI Model Explainability, Shapley Values",
         "AIモデルの説明可能性Shapley値からの属性推定リスクの評価とその対策"
     ),
     booktitle: setContentString(
         "Computer Security Symposium 2023 (CSS2023)",
         "コンピュータセキュリティシンポジウム2023（CSS2023）"
     ),
-    publisher: setContentString(
+    organization: setContentString(
         "Information Processing Society of Japan",
         "情報処理学会"
     ),
     year: 2023,
     english_only: false,
+    pages: setContentString("71-78"),
     note: setContentString("(in Japanese)", " "),
 };
 
@@ -110,14 +114,18 @@ const ICSS2024: InProceedings = {
         setContentString("Hiroaki Kikuchi", "菊池 浩明"),
     ],
     title: setContentString(
-        "Evaluation of Feature Inference Risk from Explainable AI Metrics LIME and Shapley Values",
+        "Evaluation of Feature Inference Risk from Explainable AI metrics LIME and Shapley Values",
         "AIモデルの説明可能性LIMEとShapley値からの属性推定リスクの評価"
     ),
-    booktitle: setContentString("IEICE Technical Report", "信学技報"),
+    booktitle: setContentString(
+        "IEICE Technical Report",
+        "電子情報通信学会技術研究報告"
+    ),
     year: 2024,
     english_only: false,
     volume: setContentString("123"),
     number: setContentString("448"),
+    reportNumber: "ICSS2023-88",
     pages: setContentString("137-144"),
     note: setContentString("(in Japanese)", " "),
 };
@@ -133,6 +141,7 @@ const MDAI2024: InProceedings = {
     ),
     year: 2024,
     english_only: true,
+    pages: setContentString("157-166"),
     note: setContentString("(USB Proceedings)", "（USB Proceedings）"),
 };
 
@@ -160,19 +169,20 @@ const CSS2024: InProceedings = {
         setContentString("Hiroaki Kikuchi", "菊池 浩明"),
     ],
     title: setContentString(
-        "Empirical Evaluation of Record Reconstruction Risk against Differentially Private Model Explanations DPGD-Explain",
+        "Empirical Evaluation of Record Reconstruction Risk from DPGD-Explain Model Explanations with Differential Privacy",
         "差分プライバシーを保証したモデル説明DPGD-Explainに対するレコード再構築リスクの実験評価"
     ),
     booktitle: setContentString(
         "Computer Security Symposium 2024 (CSS2024)",
         "コンピュータセキュリティシンポジウム2024（CSS2024）"
     ),
-    publisher: setContentString(
+    organization: setContentString(
         "Information Processing Society of Japan",
         "情報処理学会"
     ),
     year: 2024,
     english_only: false,
+    pages: setContentString("274-280"),
     note: setContentString("(in Japanese)", " "),
 };
 
@@ -221,19 +231,20 @@ const CSS2025: InProceedings = {
         setContentString("Hiroaki Kikuchi", "菊池 浩明"),
     ],
     title: setContentString(
-        "Empirical Evaluation of Record Reconstruction Risk and Explainability",
+        "Empirical Evaluation of Record Reconstruction Risk for Explainability",
         "説明可能性に対するレコード再構築リスクの実験的評価",
     ),
     booktitle: setContentString(
         "Computer Security Symposium 2025 (CSS2025)",
         "コンピュータセキュリティシンポジウム2025（CSS2025）"
     ),
-    publisher: setContentString(
+    organization: setContentString(
         "Information Processing Society of Japan",
         "情報処理学会"
     ),
     year: 2025,
     english_only: false,
+    pages: setContentString("322-329"),
     note: setContentString("(in Japanese)", " "),
 };
 
@@ -269,12 +280,13 @@ const CSS2026: InProceedings = {
         "Computer Security Symposium 2026 (CSS2026)",
         "コンピュータセキュリティシンポジウム2026（CSS2026）"
     ),
-    publisher: setContentString(
+    organization: setContentString(
         "Information Processing Society of Japan",
         "情報処理学会"
     ),
     year: 2026,
     english_only: false,
+    pages: setContentString("3134-3141"),
     note: setContentString("(in Japanese)", " "),
 };
 
@@ -323,6 +335,10 @@ export const toCitationParts = (p: Publication, lang: Lang): CitationPart[] => {
             ? `${names.slice(0, -1).join(comma)} and ${names.at(-1)}`
             : names.join(comma);
     const title = t(lang, p.title.en, p.title.jp);
+    const organization =
+        "organization" in p && p.organization
+            ? t(lang, p.organization.en, p.organization.jp)
+            : "";
     const venue = "journal" in p ? p.journal : p.booktitle;
     const venueText = t(lang, venue.en, venue.jp);
     const conferencePrefix = "booktitle" in p && p.english_only ? "Proc. " : "";
@@ -336,6 +352,7 @@ export const toCitationParts = (p: Publication, lang: Lang): CitationPart[] => {
     const number = p.number
         ? `No.${labelSpace}${t(lang, p.number.en, p.number.jp)}`
         : "";
+    const reportNumber = "reportNumber" in p ? p.reportNumber : "";
     const pageRange = p.pages ? t(lang, p.pages.en, p.pages.jp) : "";
     const pages = pageRange
         ? `${/^\d+$/u.test(pageRange) ? "p." : "pp."}${labelSpace}${pageRange}`
@@ -348,7 +365,7 @@ export const toCitationParts = (p: Publication, lang: Lang): CitationPart[] => {
             : "";
     const address =
         "address" in p && p.address ? t(lang, p.address.en, p.address.jp) : "";
-    const details = [series, volume, number, pages, publisher, address]
+    const details = [series, volume, number, reportNumber, pages, publisher, address]
         .filter(Boolean)
         .join(comma);
     const date = t(lang, ` (${p.year})`, `（${p.year}）`);
@@ -358,7 +375,9 @@ export const toCitationParts = (p: Publication, lang: Lang): CitationPart[] => {
         : "";
 
     return [
-        { text: `${authors}${colon}${title}${comma}` },
+        {
+            text: `${authors}${colon}${title}${comma}${organization ? `${organization}${comma}` : ""}`,
+        },
         {
             text: `${conferencePrefix}${venueMatch?.[1] ?? venueText}`,
             italic: lang === "en",
