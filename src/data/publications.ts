@@ -29,13 +29,16 @@ type InProceedings = {
     booktitle: ContentString;
     year: number;
     english_only: boolean;
+    series?: ContentString;
+    volume?: ContentString;
+    number?: ContentString;
     pages?: ContentString;
     publisher?: ContentString;
     address?: ContentString;
     note?: ContentString;
 } & PublicationResources;
 
-type Publication = Article | InProceedings;
+export type Publication = Article | InProceedings;
 
 const CSEC2023: InProceedings = {
     authors: [
@@ -52,10 +55,9 @@ const CSEC2023: InProceedings = {
     ),
     year: 2023,
     english_only: false,
-    pages: setContentString(
-        "Vol. 2023-CSEC-100, No. 38, pp. 1-7",
-        "Vol. 2023-CSEC-100，No. 38，pp. 1-7"
-    ),
+    volume: setContentString("2023-CSEC-100"),
+    number: setContentString("38"),
+    pages: setContentString("1-7"),
     note: setContentString("(in Japanese)", " "),
 };
 
@@ -73,7 +75,9 @@ const MSPN2023: InProceedings = {
     ),
     year: 2024,
     english_only: true,
-    pages: setContentString("LNCS, Vol. 14482, pp. 175-187"),
+    series: setContentString("LNCS"),
+    volume: setContentString("14482"),
+    pages: setContentString("175-187"),
     publisher: setContentString("Springer"),
     address: setContentString("Cham"),
 };
@@ -90,6 +94,10 @@ const CSS2023: InProceedings = {
     booktitle: setContentString(
         "Computer Security Symposium 2023 (CSS2023)",
         "コンピュータセキュリティシンポジウム2023（CSS2023）"
+    ),
+    publisher: setContentString(
+        "Information Processing Society of Japan",
+        "情報処理学会"
     ),
     year: 2023,
     english_only: false,
@@ -108,10 +116,9 @@ const ICSS2024: InProceedings = {
     booktitle: setContentString("IEICE Technical Report", "信学技報"),
     year: 2024,
     english_only: false,
-    pages: setContentString(
-        "Vol. 123, No. 448, pp. 137-144",
-        "Vol. 123，No. 448，pp. 137-144"
-    ),
+    volume: setContentString("123"),
+    number: setContentString("448"),
+    pages: setContentString("137-144"),
     note: setContentString("(in Japanese)", " "),
 };
 
@@ -140,7 +147,9 @@ const PSD2024: InProceedings = {
     booktitle: setContentString("Privacy in Statistical Databases (PSD 2024)"),
     year: 2024,
     english_only: true,
-    pages: setContentString("LNCS, Vol. 14915, pp. 329-343"),
+    series: setContentString("LNCS"),
+    volume: setContentString("14915"),
+    pages: setContentString("329-343"),
     publisher: setContentString("Springer"),
     address: setContentString("Cham"),
 };
@@ -157,6 +166,10 @@ const CSS2024: InProceedings = {
     booktitle: setContentString(
         "Computer Security Symposium 2024 (CSS2024)",
         "コンピュータセキュリティシンポジウム2024（CSS2024）"
+    ),
+    publisher: setContentString(
+        "Information Processing Society of Japan",
+        "情報処理学会"
     ),
     year: 2024,
     english_only: false,
@@ -176,7 +189,9 @@ const JSAIisAI2025: InProceedings = {
     ),
     year: 2025,
     english_only: true,
-    pages: setContentString("LNAI, Vol. 15692, pp. 355-367"),
+    series: setContentString("LNAI"),
+    volume: setContentString("15692"),
+    pages: setContentString("355-367"),
     publisher: setContentString("Springer"),
     address: setContentString("Singapore"),
 };
@@ -193,9 +208,9 @@ const IPSJ2025: Article = {
     journal: setContentString("IPSJ Journal", "情報処理学会論文誌"),
     year: 2025,
     english_only: false,
-    volume: setContentString("Vol. 66"),
-    number: setContentString("No. 9"),
-    pages: setContentString("pp. 1310-1322"),
+    volume: setContentString("66"),
+    number: setContentString("9"),
+    pages: setContentString("1310-1322"),
     month: setContentString("September", "9月"),
     note: setContentString("(in Japanese)", " "),
 };
@@ -212,6 +227,10 @@ const CSS2025: InProceedings = {
     booktitle: setContentString(
         "Computer Security Symposium 2025 (CSS2025)",
         "コンピュータセキュリティシンポジウム2025（CSS2025）"
+    ),
+    publisher: setContentString(
+        "Information Processing Society of Japan",
+        "情報処理学会"
     ),
     year: 2025,
     english_only: false,
@@ -237,6 +256,28 @@ const ICPRAI2026: InProceedings = {
     ],
 };
 
+const CSS2026: InProceedings = {
+    authors: [
+        setContentString("Ryotaro Toma", "當麻 僚太郎"),
+        setContentString("Hiroaki Kikuchi", "菊池 浩明"),
+    ],
+    title: setContentString(
+        "A Privacy-Aware LLM Rewriting Framework for Model Explanations against Record Reconstruction Attacks",
+        "レコード再構築攻撃に対するプライバシーを考慮したLLMベース自然言語説明フレームワークの提案"
+    ),
+    booktitle: setContentString(
+        "Computer Security Symposium 2026 (CSS2026)",
+        "コンピュータセキュリティシンポジウム2026（CSS2026）"
+    ),
+    publisher: setContentString(
+        "Information Processing Society of Japan",
+        "情報処理学会"
+    ),
+    year: 2026,
+    english_only: false,
+    note: setContentString("(in Japanese)", " "),
+};
+
 export const pubsPeerReviewed: Publication[] = [
     MSPN2023,
     MDAI2024,
@@ -252,51 +293,92 @@ export const pubsDomestic: Publication[] = [
     ICSS2024,
     CSS2024,
     CSS2025,
+    CSS2026,
 ];
 
-export const toText = (p: Publication, lang: Lang): string => {
+type CitationPart = {
+    text: string;
+    italic?: boolean;
+};
+
+const formatEnglishAuthor = (name: string): string => {
+    const words = name.trim().split(/\s+/u);
+    const familyName = words.pop() ?? "";
+    const initials = words.map((word) => `${word[0]}.`).join("");
+    return initials ? `${familyName}, ${initials}` : familyName;
+};
+
+export const toCitationParts = (p: Publication, lang: Lang): CitationPart[] => {
     lang = p.english_only ? "en" : lang;
     const comma = t(lang, ", ", "，");
-    const period = t(lang, ". ", "．");
+    const period = t(lang, ".", "．");
     const colon = t(lang, ": ", "：");
-
-    const authors = p.authors.map((a) => t(lang, a.en, a.jp)).join(comma);
+    const names = p.authors.map((author) =>
+        lang === "jp" && author.jp
+            ? author.jp.replace(/\s+/gu, "")
+            : formatEnglishAuthor(author.en)
+    );
+    const authors =
+        lang === "en" && names.length > 1
+            ? `${names.slice(0, -1).join(comma)} and ${names.at(-1)}`
+            : names.join(comma);
     const title = t(lang, p.title.en, p.title.jp);
-    const year = p.year;
-    const pages = p.pages ? t(lang, p.pages.en, p.pages.jp) : "";
-
-    if ("journal" in p) {
-        const journal = t(lang, p.journal.en, p.journal.jp);
-        const volume = p.volume ? t(lang, p.volume.en, p.volume.jp) : "";
-        const number = p.number ? t(lang, p.number.en, p.number.jp) : "";
-        const month = p.month ? t(lang, p.month.en, p.month.jp) : "";
-        const note = p.note ? t(lang, p.note.en, p.note.jp) : "";
-
-        const date = t(
-            lang,
-            `${month ? month + comma : ""}${year}`,
-            `${year}年${month ? month : ""}`
-        );
-
-        const optional = [volume, number, pages].filter(Boolean);
-
-        return `${authors}${colon}${title}${period}${journal}${comma}${optional.join(
-            comma
-        )}${comma}${date}${period}${note}`;
-    } else {
-        const booktitle = t(lang, p.booktitle.en, p.booktitle.jp);
-        const publisher = p.publisher
+    const venue = "journal" in p ? p.journal : p.booktitle;
+    const venueText = t(lang, venue.en, venue.jp);
+    const conferencePrefix = "booktitle" in p && p.english_only ? "Proc. " : "";
+    // Keep a conference acronym and its parentheses upright in English citations.
+    const venueMatch =
+        lang === "en" ? venueText.match(/^(.*?) (\([^()]+\))$/u) : null;
+    const labelSpace = lang === "en" ? " " : "";
+    const volume = p.volume
+        ? `Vol.${labelSpace}${t(lang, p.volume.en, p.volume.jp)}`
+        : "";
+    const number = p.number
+        ? `No.${labelSpace}${t(lang, p.number.en, p.number.jp)}`
+        : "";
+    const pageRange = p.pages ? t(lang, p.pages.en, p.pages.jp) : "";
+    const pages = pageRange
+        ? `${/^\d+$/u.test(pageRange) ? "p." : "pp."}${labelSpace}${pageRange}`
+        : "";
+    const series =
+        "series" in p && p.series ? t(lang, p.series.en, p.series.jp) : "";
+    const publisher =
+        "publisher" in p && p.publisher
             ? t(lang, p.publisher.en, p.publisher.jp)
             : "";
-        const address = p.address ? t(lang, p.address.en, p.address.jp) : "";
-        const note = p.note ? t(lang, p.note.en, p.note.jp) : "";
+    const address =
+        "address" in p && p.address ? t(lang, p.address.en, p.address.jp) : "";
+    const details = [series, volume, number, pages, publisher, address]
+        .filter(Boolean)
+        .join(comma);
+    const date = t(lang, ` (${p.year})`, `（${p.year}）`);
+    const note = p.note ? t(lang, p.note.en, p.note.jp).trim() : "";
+    const noteText = note
+        ? `${lang === "en" ? " " : ""}${note}${note.endsWith(period) ? "" : period}`
+        : "";
 
-        const optional = `${[pages, publisher, address]
-            .filter(Boolean)
-            .join(comma)}`;
-
-        return `${authors}${colon}${title}${comma}${booktitle}${
-            optional ? `${comma}${optional}` : ""
-        }${period}${year}${period}${note}`;
-    }
+    return [
+        { text: `${authors}${colon}${title}${comma}` },
+        {
+            text: `${conferencePrefix}${venueMatch?.[1] ?? venueText}`,
+            italic: lang === "en",
+        },
+        { text: venueMatch ? ` ${venueMatch[2]}` : "" },
+        { text: `${details ? `${comma}${details}` : ""}${date}${period}${noteText}` },
+    ];
 };
+
+export const toText = (p: Publication, lang: Lang): string =>
+    toCitationParts(p, lang)
+        .map((part) => part.text)
+        .join("");
+
+export const matchesPublication = (p: Publication, query: string): boolean =>
+    [
+        toText(p, "jp"),
+        toText(p, "en"),
+        ...p.authors.flatMap((author) => [author.en, author.jp ?? ""]),
+    ]
+        .join(" ")
+        .toLowerCase()
+        .includes(query.toLowerCase());

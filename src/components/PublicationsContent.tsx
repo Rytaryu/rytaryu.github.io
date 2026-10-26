@@ -1,6 +1,11 @@
-import { useMemo, useState } from "react";
-import { pubsPeerReviewed, pubsDomestic, toText } from "../data/publications";
-import type { PublicationLink } from "../data/publications";
+import { Fragment, useMemo, useState } from "react";
+import {
+    pubsPeerReviewed,
+    pubsDomestic,
+    toCitationParts,
+    matchesPublication,
+} from "../data/publications";
+import type { Publication, PublicationLink } from "../data/publications";
 import type { Lang } from "../utils";
 import { t, Section } from "../utils";
 
@@ -37,25 +42,34 @@ function PublicationLinks({
     );
 }
 
+function PublicationCitation({
+    publication,
+    lang,
+}: {
+    publication: Publication;
+    lang: Lang;
+}) {
+    return toCitationParts(publication, lang).map((part, index) =>
+        part.italic ? (
+            <em key={index} className="italic [font-synthesis:style]">
+                {part.text}
+            </em>
+        ) : (
+            <Fragment key={index}>{part.text}</Fragment>
+        )
+    );
+}
+
 export default function PublicationsContent({ lang }: { lang: Lang }) {
     const [q, setQ] = useState("");
-    const qn = (s: string) => s.toLowerCase();
     const filteredPeer = useMemo(
         () =>
-            pubsPeerReviewed.filter((p) =>
-                (toText(p, "jp") + toText(p, "en"))
-                    .toLowerCase()
-                    .includes(qn(q))
-            ),
+            pubsPeerReviewed.filter((p) => matchesPublication(p, q)),
         [q]
     );
     const filteredDomestic = useMemo(
         () =>
-            pubsDomestic.filter((p) =>
-                (toText(p, "jp") + toText(p, "en"))
-                    .toLowerCase()
-                    .includes(qn(q))
-            ),
+            pubsDomestic.filter((p) => matchesPublication(p, q)),
         [q]
     );
 
@@ -85,7 +99,9 @@ export default function PublicationsContent({ lang }: { lang: Lang }) {
                 <ul className="list-disc pl-6 space-y-3">
                     {filteredPeer.map((p, i) => (
                         <li key={i}>
-                            <div>{toText(p, lang)}</div>
+                            <div>
+                                <PublicationCitation publication={p} lang={lang} />
+                            </div>
                             <PublicationLinks links={p.links} lang={lang} />
                         </li>
                     ))}
@@ -102,7 +118,9 @@ export default function PublicationsContent({ lang }: { lang: Lang }) {
                 <ul className="list-disc pl-6 space-y-3">
                     {filteredDomestic.map((p, i) => (
                         <li key={i}>
-                            <div>{toText(p, lang)}</div>
+                            <div>
+                                <PublicationCitation publication={p} lang={lang} />
+                            </div>
                             <PublicationLinks links={p.links} lang={lang} />
                         </li>
                     ))}
